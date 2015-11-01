@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+
+button.game {
+width:100px;
+height:100px;
+}
+
+#header {
+	height:100px;
+    background-color:#808080;
+    color:white;
+    text-align:center;
+    padding:1px;
+}
+#nav {
+    line-height:30px;
+    background-color:red;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px; 
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+    
+}
+</style>	
+</head>
+<body>
+
+    <div id="header"> 
+    <h1>X si 0</h1>
+    </div>
+  
+    <div id = "nav">
+  
+    <button  type = "button" onclick=reset()> New game </button> <br>
+    
+    </div>
+  
+    <div id = "section">
+
+    <button id="b0" style=width:30px style=height:30px type = "button" onclick=checkButton0()> - </button> 
+    <button id="b1" style=width:30px style=height:30px type = "button" onclick=checkButton1()> - </button>
+    <button id="b2" style=width:30px style=height:30px type = "button" onclick=checkButton2()> - </button> <br>
+    <button id="b3" style=width:30px style=height:30px type = "button" onclick=checkButton3()> - </button>
+    <button id="b4" style=width:30px style=height:30px type = "button" onclick=checkButton4()> - </button>
+    <button id="b5" style=width:30px style=height:30px type = "button" onclick=checkButton5()> - </button> <br>
+    <button id="b6" style=width:30px style=height:30px type = "button" onclick=checkButton6()> - </button>
+    <button id="b7" style=width:30px style=height:30px type = "button" onclick=checkButton7()> - </button>
+    <button id="b8" style=width:30px style=height:30px type = "button" onclick=checkButton8()> - </button>
+	
+	
+	
+	
+  <p id="status" PLAY! </p>	
+  <script>
+  
+
+  var btnX = [];
+  var btn0 = [];
+  var turn = 0;
+  var player = 1;
+  var buttonText;
+  
+  function winX(){
+    document.getElementById("status").innerHTML = "X a castigat!";
+    document.getElementById("b0").disabled = true;
+    document.getElementById("b1").disabled = true;
+    document.getElementById("b2").disabled = true;
+    document.getElementById("b3").disabled = true;
+    document.getElementById("b4").disabled = true;
+    document.getElementById("b5").disabled = true;
+    document.getElementById("b6").disabled = true;
+    document.getElementById("b7").disabled = true;
+    document.getElementById("b8").disabled = true;
+  }
+  function win0(){
+    document.getElementById("status").innerHTML = "0 a castigat!";
+    document.getElementById("b0").disabled = true;
+    document.getElementById("b1").disabled = true;
+    document.getElementById("b2").disabled = true;
+    document.getElementById("b3").disabled = true;
+    document.getElementById("b4").disabled = true;
+    document.getElementById("b5").disabled = true;
+    document.getElementById("b6").disabled = true;
+    document.getElementById("b7").disabled = true;
+    document.getElementById("b8").disabled = true;
+  }
+  
+  function gameCheck(){
+  // Verifica statusul jocului
+  for (i=0; i<3; i = i + 3){
+    if( btnX[i] == 1 && btnX[i+1] == 1 && btnX[i+2] == 1 ) {
+    winX();						
+    }
+  }
+  for (i=0; i<3; i++){
+    if( btnX[i] == 1 && btnX[i+3] == 1 && btnX[i+6] == 1 ) {
+    winX();  
+    }	
+  }
+  if( btnX[0] == 1 && btnX[4] == 1 &&btnX[8] == 1 ) {
+  winX(); 
+  }
+  if( btnX[2] == 1 && btnX[4] == 1 &&btnX[6] == 1 ) {
+  winX(); 
+  }
+  
+   for (i=0; i<3; i = i + 3){
+    if( btn0[i] == 1 && btn0[i+1] == 1 && btn0[i+2] == 1 ) {
+    win0();						
+    }
+  }
+  for (i=0; i<3; i++){
+    if( btn0[i] == 1 && btn0[i+3] == 1 && btn0[i+6] == 1 ) {
+    win0();  
+    }	
+  }
+  if( btn0[0] == 1 && btn0[4] == 1 &&btn0[8] == 1 ) {
+  win0(); 
+  }
+  if( btn0[2] == 1 && btn0[4] == 1 &&btn0[6] == 1 ) {
+  win0(); 
+  }
+  
+}
+    
+ function checkButton0(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[0]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[0]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b0").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b0").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+		
+ function checkButton1(){
+      if (turn <9) {
+      if (turn%2==0) {
+      player = 1;
+      btnX[1]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[1]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b1").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b1").disabled = true;
+  } else if (turn == 9){
+    document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++	
+    gameCheck()
+}
+
+ function checkButton2(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[2]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[2]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b2").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b2").disabled = true;
+  } else if (turn == 9) {
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton3(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[3]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[3]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b3").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b3").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton4(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[4]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[4]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b4").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b4").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton5(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[5]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[5]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b5").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b5").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton6(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[6]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[6]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b6").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b6").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton7(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[7]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[7]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b7").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b7").disabled = true;
+  } else if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+
+ function checkButton8(){
+      if (turn <9){
+      if (turn%2==0) {
+      player = 1;
+      btnX[8]=1;
+      buttonText = "X";
+  } else {
+      player = 2;
+      btn0[8]=1;
+      buttonText = "0";
+  }
+    document.getElementById("b8").innerHTML = buttonText;
+    document.getElementById("status").innerHTML = turn ;
+    document.getElementById("b8").disabled = true;
+  } if (turn == 9){
+     document.getElementById("status").innerHTML = "Game Over! Click New Game"
+  }	
+    turn++
+    gameCheck()
+}
+		
+	function reset()
+	
+	{
+    btnX = [0,0,0,0,0,0,0,0,0];
+    btn0 = [0,0,0,0,0,0,0,0,0];
+    turn = 0;
+		
+	document.getElementById("b0").removeAttribute("disabled");
+	document.getElementById("b1").removeAttribute("disabled");
+	document.getElementById("b2").removeAttribute("disabled");
+	document.getElementById("b3").removeAttribute("disabled");
+	document.getElementById("b4").removeAttribute("disabled");
+	document.getElementById("b5").removeAttribute("disabled");
+	document.getElementById("b6").removeAttribute("disabled");
+	document.getElementById("b7").removeAttribute("disabled");
+	document.getElementById("b8").removeAttribute("disabled");
+	
+    document.getElementById("b0").innerHTML = "-";
+	document.getElementById("b1").innerHTML = "-";
+	document.getElementById("b2").innerHTML = "-";
+	document.getElementById("b3").innerHTML = "-";
+	document.getElementById("b4").innerHTML = "-";
+	document.getElementById("b5").innerHTML = "-";
+	document.getElementById("b6").innerHTML = "-";
+	document.getElementById("b7").innerHTML = "-";
+	document.getElementById("b8").innerHTML = "-";
+		
+	document.getElementById("status").innerHTML = "PLAY!";
+		
+	}
+		
+  </script>
+ 
+  </div>
+  
+    
+</body>
+
+</html>
